@@ -7,6 +7,10 @@ from pep_parse.constants import BASE_DIR, RESULTS_DIR, TIME_FORMAT
 
 class PepParsePipeline:
 
+    def __init__(self):
+        self.results_dir = BASE_DIR / RESULTS_DIR
+        self.results_dir.mkdir(exist_ok=True)
+
     def open_spider(self, spider):
         self.status_count = defaultdict(int)
 
@@ -17,9 +21,7 @@ class PepParsePipeline:
     def close_spider(self, spider):
         filename = (f'status_summary_'
                     f'{dt.datetime.now().strftime(TIME_FORMAT)}.csv')
-        results_dir = BASE_DIR / RESULTS_DIR
-        results_dir.mkdir(exist_ok=True)
-        filepath = results_dir / filename
+        filepath = self.results_dir / filename
         results = [
             ('Статус', 'Количество'),
             *self.status_count.items(),
