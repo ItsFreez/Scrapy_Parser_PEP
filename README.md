@@ -50,3 +50,7 @@ pip install -r requirements.txt
 ```
 scrapy crawl pep
 ```
+
+### Автор проекта
+
+[ItsFreez](https://github.com/ItsFreez)
